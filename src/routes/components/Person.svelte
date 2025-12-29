@@ -5,7 +5,7 @@
 		person: Person
 	}
 
-    let {person, updateUI} = $props();
+    let {person, updateUI, removeAction} = $props();
 
     // svelte-ignore state_referenced_locally
     let payedAmount = $state(person.payed);
@@ -16,6 +16,7 @@
     }
 
     function removePerson() {
+        removeAction(person.id);
         updateUI();
     }
 
@@ -26,5 +27,5 @@
     <td><input type="number" bind:value={payedAmount} onchange={onPayedUpdate}></td>
     <td>{person.owed}</td>
     <td>{person.owes}</td>
-    <td><button onclick={() => {}}>Remove</button></td>
+    <td><button onclick={() => {removePerson()}}>Remove</button></td>
 </tr>

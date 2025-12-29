@@ -16,5 +16,5 @@ export type PersonActions = {
 	remove: (id: number) => void;
 	edit?: (id: number) => void;
 	add?: (person: Person) => void;
-	select?: (id: number) => void;
+	addAmount?: (id: number, amount: number) => void;
 };

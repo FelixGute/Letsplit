@@ -53,16 +53,29 @@ function syncURL(): void {
 const actions: PersonActions = {
 	remove(id) {
 		persons = persons.filter(p => p.id !== id);
+    updateUI();
 	},
 	edit(id) {
 		console.log('edit', id);
-	}
+    updateUI();
+	},
+  addAmount(id, amount) {
+    // find persons with id
+    // add amount to persons payed
+    let person:Person|undefined = persons.find(i => (i.id == id));
+    if(person != undefined && amount > 0) {
+      person.payed += amount;
+    }
+    updateUI();
+  }
 };
 
 </script>
 
 <AddPerson persons={persons} updateUI={updateUI}/>
+{#if persons.length > 0}
 <h2>Total amount: <span>{totalAmount}</span></h2>
 <h2>Per person: <span>{amountPerPerson}</span></h2>
-<PersonTable persons={persons} updateUI={updateUI}/>
+<PersonTable persons={persons} updateUI={updateUI} removeAction={actions.remove}/>
 <OweMessageBox oweMessages={oweMessages}/>
+{/if}

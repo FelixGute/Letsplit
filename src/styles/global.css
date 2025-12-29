@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+body {
+	font-family: "Inter", sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#main {
+	display: flex;
+	flex-direction: center;
+}
+
+input {
+	font-family: inherit;
+	border-radius: 5px;
+	border: 1px solid darkgray;
+	padding: 6px;
+}
+
+button {
+	border-radius: 5px;
+	border: none;
+	padding: 6px 8px;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+	background: darkgray;
+	transform: translateY(-1px);
+}
+
+button:active {
+	transform: translateY(1px);
+}
+
+table {
+	table-layout: fixed;
+	margin: 10px auto;
+	border-collapse: collapse;
+}
+
+th,
+td {
+	padding: 0.6em;
+}
