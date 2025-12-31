@@ -2,32 +2,24 @@
 	import Person from "./Person.svelte";
     let {persons, updateUI, actions} = $props();
 </script>
-<table>
-<thead>
-<tr>
-    <th>Name</th>
-    <th>Payed</th>
-    <th>Owed</th>
-    <th>Owes</th>
-    <th>Edit</th>
-    <th>Remove</th>
-</tr>
-</thead>
-<tbody>
-    {#each persons as person}
-    <Person person={person} updateUI={updateUI} actions={actions} />
-    {/each}
-</tbody>
-</table>
-
+<div>
+            {#each persons as person}
+            <Person person={person} updateUI={updateUI} actions={actions} />
+            {/each} 
+</div>
 <style>
-    
-table {
-	table-layout: fixed;
-	margin: 10px auto;
-	border-collapse: collapse;
-    border-radius: 5px;
-    overflow: hidden;
+
+#person-table {
+    overflow-x: scroll;
+    width: 100%;
+}
+
+    table {
+        table-layout: fixed;
+        margin: 10px auto;
+        border-collapse: collapse;
+        border-radius: 5px;
+        width: 100%;
 }
 
 th {
