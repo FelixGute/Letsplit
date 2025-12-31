@@ -8,6 +8,8 @@
   import PersonTable from '../../components/PersonTable.svelte';
   import OweMessageBox from '../../components/OweMessageBox.svelte';
   
+  import EditModal from '../../components/EditModal.svelte';
+
   import { updateBalances, createOweMessages } from '$lib/calculateOwes';
   import { formatPersons, deformatPersons  } from '$lib/formatPersons';
   import { encodeUrlState, decodeUrlState  } from '$lib/urlState';
@@ -50,18 +52,45 @@ function syncURL(): void {
 	});
 }
 
+	let editingPerson = $state<Person | null>(null);
+
+	function openEdit(person: Person) {
+		// Important: clone to avoid mutating table data directly
+		//editingPerson = structuredClone(person);
+    editingPerson = {id: person.id, name: person.name, payed: person.payed, owes: person.owes, owed: person.owed }
+	}
+
+	function closeEdit() {
+		editingPerson = null;
+    updateUI();
+	}
+
+	function saveEdit(updated: Person) {
+		persons = persons.map(person => {
+	if (person.id === updated.id) {
+		return updated;
+	}
+
+	return person;
+});
+		closeEdit();
+	}
+
 const actions: PersonActions = {
 	remove(id) {
 		persons = persons.filter(p => p.id !== id);
     updateUI();
 	},
 	edit(id) {
-		console.log('edit', id);
-    updateUI();
+    let person:Person|undefined = persons.find(i => (i.id == id));
+    if(person != undefined) {
+      openEdit(person);
+    }
 	},
   addAmount(id, amount) {
     // find persons with id
     // add amount to persons payed
+    // First open modal, then use this on confirm
     let person:Person|undefined = persons.find(i => (i.id == id));
     if(person != undefined && amount > 0) {
       person.payed += amount;
@@ -76,6 +105,14 @@ const actions: PersonActions = {
 {#if persons.length > 0}
 <h2>Total amount: <span>{totalAmount}</span></h2>
 <h2>Per person: <span>{amountPerPerson}</span></h2>
-<PersonTable persons={persons} updateUI={updateUI} removeAction={actions.remove}/>
+<PersonTable persons={persons} updateUI={updateUI} actions={actions}/>
 <OweMessageBox oweMessages={oweMessages}/>
+{/if}
+
+{#if editingPerson}
+	<EditModal
+		bind:person={editingPerson}
+		onclose={closeEdit}
+		save={saveEdit}
+	/>
 {/if}

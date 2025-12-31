@@ -1,5 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
+:root {
+	--color--confirm--dark: oklch(52.7% 0.154 150.069);
+	--color--confirm--light: oklch(96.2% 0.044 156.743);
+
+	--color--remove--dark: oklch(57.7% 0.245 27.325);
+	--color--remove--light: oklch(93.6% 0.032 17.717);
+}
+
 body {
 	font-family: "Inter", sans-serif;
 	display: flex;
@@ -26,24 +34,15 @@ button {
 	padding: 6px 8px;
 	cursor: pointer;
 	transition: all 0.3s ease-in-out;
+	background: oklch(44.6% 0.043 257.281);
+	color: oklch(98.4% 0.003 247.858);
 }
 
 button:hover {
-	background: darkgray;
+	background: oklch(20.8% 0.042 265.755);
 	transform: translateY(-1px);
 }
 
 button:active {
 	transform: translateY(1px);
-}
-
-table {
-	table-layout: fixed;
-	margin: 10px auto;
-	border-collapse: collapse;
-}
-
-th,
-td {
-	padding: 0.6em;
 }

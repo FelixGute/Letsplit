@@ -44,4 +44,10 @@
         flex-direction: column;
         gap: 20px;
     }
+
+    button {
+        background: var(--color--confirm--dark);
+        color: var(--color--confirm--light);
+        font-size: 1.2rem;
+    }
 </style>
